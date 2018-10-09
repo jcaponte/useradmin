@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorator="layout/mainLayout">
+
+<head>
+<title>Usuarios del Sistema - Editar</title>
+</head>
+<body>
+
+	<section class="content-header" layout:fragment="pageHeader">
+		<h1>Usuarios del Sistema - Editar</h1>
+		<ol class="breadcrumb">
+			<li><i class="fa fa-dashboard"></i> Home</li>
+			<li class="">Usuarios del Sistema</li>
+			<li class="active">Editar</li>
+		</ol>
+	</section>
+
+	<section class="content" layout:fragment="content">
+
+		<div th:include="fragments/alert_messages"></div>
+
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Editar Usuario</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- FORMULARIO -->
+
+					<div th:include="fragments/loading" class="loading-animation-panel"
+						id="userFormLoading"></div>
+
+					<div th:replace="users/form"></div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+
+</html>

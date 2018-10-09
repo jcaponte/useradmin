@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<th:block th:fragment="form">
+		<form method="post" th:action="!${user.id}?@{/users}:@{/users/{id}(id=${user.id})}" th:object="${user}"
+			id="userForm" class="validateForm" autocomplete="false"
+			enctype="multipart/form-data">
+
+			<div class="box-body">
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+							<label>Nombre*</label> <input type="text"
+								class="form-control required" name="name" th:field="*{name}"
+								placeholder="Nombre de usuario" />
+							<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+								th:class="text-red">Datos inválidos</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+							<label>Email*</label> <input type="text"
+								class="form-control required email" name="email"
+								th:field="*{email}" placeholder="Correo electrónico" />
+							<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+								th:class="text-red">Datos inválidos</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+							<label>Clave*</label> <input type="password"
+								class="form-control required" name="password"
+								th:field="*{password}" placeholder="clave usuario" />
+							<p th:if="${#fields.hasErrors('password')}"
+								th:errors="*{password}" th:class="text-red">Datos inválidos</p>
+						</div>
+					</div>		
+					
+					<div class="col-md-6">
+						<div class="form-group">
+							<label>Roles</label>
+							<div>
+								<p th:each="role,rowStat : ${rolesList}">
+									<input type="checkbox" th:field="*{roles}"
+										th:value="${role.id}" /> <label th:text="${role.name}">Rol</label>
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>	
+				
+			</div>
+
+			<div class="box-footer" th:inline="text">			
+				<button type="reset" th:attr="onclick='window.location=\'' + @{/users} + '\''"
+					class="btn btn-danger">Cancelar</button>
+				<button type="submit" class="btn btn-primary pull-right">Guardar
+					Datos</button>
+			</div>
+		</form>
+
+	</th:block>
+</body>
+</html>

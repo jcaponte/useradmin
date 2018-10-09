@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<th:block th:fragment="list">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box box-warning  ">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Usuarios</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-bordered table-striped" id="usersList">
+							<thead>
+								<tr>
+									<th style="width: 10px">#</th>
+									<th>Nombre</th>
+									<th>Email</th>
+									<th width="15%"><div align="center">Herramientas</div></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="user,iterStat : ${users}">
+									<td><a data-id="${user.id}"
+										th:href="@{/users/{id}(id=${user.id})}"><span
+											th:text="${iterStat.count}">1</span></a></td>
+									<td th:text="${user.name}">Nombre</td>
+									<td th:text="${user.email}">Email</td>
+									<td align="center"><a
+										th:href="@{/users/{id}(id=${user.id})}"
+										class=""><i class="fa-pb-btn fa-edit"></i>
+									</a> <a href="javascript:;"
+										th:attr="data-id=${user.id}, data-name=${user.name}, data-href=@{/users/delete/{id}(id=${user.id})}"
+										class="delete"><i
+											class="fa-pb-btn fa-remove"></i> </a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				$('.delete').click(function(){
+					if (confirm('Desea eliminar el usuario: ' + $(this).attr('data-name') + '?')) {
+						window.location =  $(this).attr('data-href'); 
+					}
+				});
+			});
+		</script>
+
+
+	</th:block>
+</body>
+</html>

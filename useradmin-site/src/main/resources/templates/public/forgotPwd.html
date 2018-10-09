@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorator="layout/loginLayout">
+<head>
+<title>Olvidó su Clave</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="login-box">
+			<div class="login-logo">
+				<a href="#"><span th:text="#{label.useradmin.title}"></span><b>Admin</b></a>
+			</div>
+			<div class="login-box-body">
+				<p class="login-box-msg" th:text="#{label.forgot_password_header}">Olvidó
+					la clave</p>
+				<form action="forgotPwd" th:action="@{/forgotPwd}" method="post"
+					id="forgotForm">
+					<div class="row">
+						<div class="col-xs-12">
+							<div th:if="${msg!=null}"
+								class="alert alert-danger alert-dismissable">
+								<p>
+									<i class="icon fa fa-ban"></i> <span th:text="${msg}"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-feedback">
+						<input type="email" class="form-control required email"
+							name="email" placeholder="Email" /> <span
+							class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-2"></div>
+						<div class="form-group col-xs-8" align="center">
+							<button type="submit" class="btn btn-primary btn-block btn-flat"
+								th:text="#{label.submit_forgot}">Enviar</button>
+						</div>
+						<div class="col-xs-2"></div>
+					</div>
+
+				</form>
+
+				<a href="login" th:href="@{/login}" th:text="#{label.back}">Regresar</a><br />
+
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="extra-script">
+		<script type="text/javascript">
+			$(function() {
+				$('#forgotForm').validate({
+					errorPlacement : function(error, element) {
+					}
+				});
+			});
+		</script>
+	</div>
+</body>
+</html>

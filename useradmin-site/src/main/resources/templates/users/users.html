@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorator="layout/mainLayout">
+
+<head>
+<title>Usuarios del Sistema</title>
+</head>
+<body>
+
+	<section class="content-header" layout:fragment="pageHeader">
+		<h1>Usuarios del Sistema</h1>
+		<ol class="breadcrumb">
+			<li><i class="fa fa-dashboard"></i> Home</li>
+			<li class="active">Usuarios</li>
+		</ol>
+	</section>
+
+	<section class="content" layout:fragment="content">
+
+		<div th:include="fragments/alert_messages"></div>
+
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="box box-primary" th:classappend="${classCollapse}">
+					<div class="box-header with-border">
+						<h3 class="box-title"><span th:text="${tittle}">Titulo</span> Usuario</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-plus"></i>
+							</button>
+						</div>
+					</div>
+					
+					<!-- FORMULARIO -->
+
+					<div th:include="fragments/loading" class="loading-animation-panel"
+						id="userFormLoading"></div>
+
+					<div th:replace="users/form"></div>
+
+				</div>
+			</div>
+		</div>
+		
+		<!-- LISTADO -->
+		
+		<div th:replace="users/list"></div>
+		
+	</section>
+
+	<div layout:fragment="extra-script">
+		<script type="text/javascript">
+			$(function() {
+				$('#userForm').validate({
+					submitHandler : function(form) {
+						$('#userFormLoading').show();
+						form.submit();
+					}
+				});
+				
+				$('#usersList').DataTable({					
+					"language":{
+				    "sProcessing":     "Procesando...",
+				    "sLengthMenu":     "Mostrar _MENU_ registros",
+				    "sZeroRecords":    "No se encontraron resultados",
+				    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+				    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+				    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+				    "sInfoPostFix":    "",
+				    "sSearch":         "Buscar:",
+				    "sUrl":            "",
+				    "sInfoThousands":  ",",
+				    "sLoadingRecords": "Cargando...",
+				    "oPaginate": {
+				        "sFirst":    "Primero",
+				        "sLast":     "Último",
+				        "sNext":     "Siguiente",
+				        "sPrevious": "Anterior"
+				    },
+				    "oAria": {
+				        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+				        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+				    }
+				}
+				});
+			});
+		</script>
+	</div>
+
+</body>
+
+</html>

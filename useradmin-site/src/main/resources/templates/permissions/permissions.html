@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	layout:decorator="layout/mainLayout">
+
+<head>
+<title>Permisos del Sistema</title>
+</head>
+<body>
+
+	<section class="content-header" layout:fragment="pageHeader">
+		<h1>Permisos del Sistema</h1>
+		<ol class="breadcrumb">
+			<li><i class="fa fa-dashboard"></i> Home</li>
+			<li class="active">Permisos</li>
+		</ol>
+	</section>
+
+	<section class="content" layout:fragment="content">
+
+		<div th:include="fragments/alert_messages"></div>
+
+
+		<!--div class="row">
+			<div class="col-xs-12">
+				<div class="box box-primary collapsed-box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Agregar Usuario</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool"
+								data-widget="collapse">
+								<i class="fa fa-plus"></i>
+							</button>
+						</div>
+					</div>
+					
+					
+
+					<div th:include="fragments/loading" class="loading-animation-panel"
+						id="userFormLoading"></div>
+
+					<div th:replace="users/form"></div>
+
+				</div>
+			</div>
+		</div-->
+		
+		<!-- LISTADO -->
+		
+		<div th:replace="permissions/list"></div>
+		
+	</section>
+
+	<!--div layout:fragment="extra-script">
+		<script type="text/javascript">
+			$(function() {
+				$('#userForm').validate({
+					submitHandler : function(form) {
+						$('#userFormLoading').show();
+						form.submit();
+					}
+				});
+				
+				$('#usersList').DataTable();
+			});
+		</script>
+	</div-->
+
+</body>
+
+</html>
